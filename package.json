@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -39,14 +40,14 @@
     "@radix-ui/react-toggle": "1.1.2",
     "@radix-ui/react-toggle-group": "1.1.2",
     "@radix-ui/react-tooltip": "1.1.8",
-    "class-variance-authority": "0.7.1",
-    "clsx": "2.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "3.6.0",
     "embla-carousel-react": "8.6.0",
-    "git": "^0.1.5",
+    "firebase": "^12.8.0",
     "input-otp": "1.4.2",
-    "lucide-react": "0.487.0",
+    "lucide-react": "^0.562.0",
     "motion": "12.23.24",
     "next-themes": "0.4.6",
     "react-day-picker": "8.10.1",
@@ -56,17 +57,24 @@
     "react-popper": "2.3.0",
     "react-resizable-panels": "2.1.7",
     "react-responsive-masonry": "2.7.1",
+    "react-router": "^7.12.0",
     "react-slick": "0.31.0",
+    "reactfire": "^4.2.3",
     "recharts": "2.15.2",
     "sonner": "2.0.3",
-    "tailwind-merge": "3.2.0",
-    "tw-animate-css": "1.3.8",
-    "vaul": "1.1.2"
+    "tailwind-merge": "^3.4.0",
+    "tw-animate-css": "^1.4.0",
+    "vaul": "1.1.2",
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
+    "@types/node": "^25.0.9",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "4.7.0",
     "tailwindcss": "4.1.12",
+    "typescript": "^5.9.3",
     "vite": "6.3.5"
   },
   "peerDependencies": {
@@ -85,10 +93,5 @@
     "overrides": {
       "vite": "6.3.5"
     }
-  },
-  "description": "This is a code bundle for EcoLap Challenge UI Design. The original project is available at https://www.figma.com/design/Q67P10s3zdepF4YDKdhdbn/EcoLap-Challenge-UI-Design.",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
