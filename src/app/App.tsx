@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Login  from './components/Login';
 import { Onboarding } from './components/Onboarding';
 import { Dashboard } from './components/Dashboard';
 import { RaceTracker } from './components/RaceTracker';
@@ -7,10 +8,10 @@ import { PitStopAcademy } from './components/PitStopAcademy';
 import { Profile } from './components/Profile';
 import { Navigation } from './components/Navigation';
 
-type Screen = 'onboarding' | 'dashboard' | 'race' | 'leaderboard' | 'academy' | 'profile';
+type Screen = "login" | "onboarding" | "dashboard" | "race" | "leaderboard" | "academy" | "profile";
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('onboarding');
+  const [currentScreen, setCurrentScreen] = useState<Screen>('login');
   const [user, setUser] = useState({
     name: '',
     avatar: '',
@@ -29,22 +30,23 @@ export default function App() {
     setCurrentScreen(screen);
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      {currentScreen === 'onboarding' ? (
-        <Onboarding onComplete={completeOnboarding} />
-      ) : (
-        <>
-          <div className="pb-20">
-            {currentScreen === 'dashboard' && <Dashboard user={user} onNavigate={navigateTo} />}
-            {currentScreen === 'race' && <RaceTracker user={user} onNavigate={navigateTo} />}
-            {currentScreen === 'leaderboard' && <Leaderboard user={user} />}
-            {currentScreen === 'academy' && <PitStopAcademy user={user} />}
-            {currentScreen === 'profile' && <Profile user={user} />}
-          </div>
-          <Navigation currentScreen={currentScreen} onNavigate={navigateTo} />
-        </>
-      )}
-    </div>
-  );
+return (
+  <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+    {currentScreen === 'onboarding' ? (
+      <Onboarding onComplete={completeOnboarding} />
+    ) : (
+      <>
+        <div className="pb-20">
+          {currentScreen === 'login' && <Login onNavigate={navigateTo} />}
+          {currentScreen === 'dashboard' && <Dashboard user={user} onNavigate={navigateTo} />}
+          {currentScreen === 'race' && <RaceTracker user={user} onNavigate={navigateTo} />}
+          {currentScreen === 'leaderboard' && <Leaderboard user={user} />}
+          {currentScreen === 'academy' && <PitStopAcademy user={user} />}
+          {currentScreen === 'profile' && <Profile user={user} />}
+        </div>
+        <Navigation currentScreen={currentScreen} onNavigate={navigateTo} />
+      </>
+    )}
+  </div>
+);
 }

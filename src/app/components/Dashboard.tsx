@@ -182,7 +182,7 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
         transition={{ delay: 0.4 }}
         className="space-y-3"
       >
-        <h2 className="text-xl text-white">Today's Stats</h2>
+        <h2 className="text-xl text-white">Weekly Stats</h2>
         <Card className="bg-slate-800/50 border-slate-700 p-5">
           <div className="grid grid-cols-2 gap-4">
             <div>

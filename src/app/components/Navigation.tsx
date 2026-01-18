@@ -6,7 +6,13 @@ interface NavigationProps {
   onNavigate: (screen: string) => void;
 }
 
+
 export function Navigation({ currentScreen, onNavigate }: NavigationProps) {
+  // Don't render navigation on login or auth screens
+  if (currentScreen === 'login' || currentScreen === 'auth' || currentScreen === 'register') {
+    return null;
+  }
+
   const navItems = [
     { id: 'dashboard', label: 'Home', icon: Home },
     { id: 'race', label: 'Race', icon: Play },

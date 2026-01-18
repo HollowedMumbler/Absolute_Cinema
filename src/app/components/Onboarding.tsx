@@ -5,12 +5,15 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card } from './ui/card';
 import { Logo } from './Logo';
+import {Dashboard} from './Dashboard';
 
 interface OnboardingProps {
   onComplete: (userData: any) => void;
 }
 
-export function Onboarding({ onComplete }: OnboardingProps) {
+
+  export function Onboarding({ onComplete }: OnboardingProps) {
+  const [goDashboard, setGoDashboard] = useState(false);
   const [step, setStep] = useState(0);
   const [name, setName] = useState('');
   const [selectedMode, setSelectedMode] = useState('');
@@ -31,16 +34,16 @@ export function Onboarding({ onComplete }: OnboardingProps) {
   ];
 
   const handleComplete = () => {
-    onComplete({
-      name,
-      avatar: selectedAvatar,
-      points: 100,
-      level: 1,
-      co2Saved: 0,
-      streakDays: 0,
-    });
-  };
-
+  onComplete({
+    name,
+    avatar: selectedAvatar,
+    points: 100,
+    level: 1,
+    co2Saved: 0,
+    streakDays: 0,
+  });
+};
+  
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -255,7 +258,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
                     onClick={handleComplete}
                     className="w-full mt-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-6"
                     size="lg"
-                  >
+                  > 
                     Start Racing! 🏁
                   </Button>
                 </div>
@@ -275,7 +278,10 @@ export function Onboarding({ onComplete }: OnboardingProps) {
             />
           ))}
         </div>
+        
       </div>
     </div>
   );
 }
+
+export default Onboarding;
