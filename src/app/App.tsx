@@ -86,6 +86,46 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="race"
+                element={
+                  <ProtectedRoute>
+                    <RaceTracker user={user} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="race"
+                element={
+                  <ProtectedRoute>
+                    <RaceTracker user={user} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="leaderboard"
+                element={
+                  <ProtectedRoute>
+                    <Leaderboard user={user} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="academy"
+                element={
+                  <ProtectedRoute>
+                    <PitStopAcademy user={user} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile user={user} />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
             <Navigation />
           </BrowserRouter>
