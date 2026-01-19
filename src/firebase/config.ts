@@ -1,6 +1,4 @@
-import { initializeApp, type FirebaseOptions } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { type FirebaseOptions } from "firebase/app";
 
 // Firebase configuration
 const firebaseConfig: FirebaseOptions = {
@@ -13,13 +11,4 @@ const firebaseConfig: FirebaseOptions = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Auth
-const auth = getAuth(app);
-
-// Firestore
-const db = getFirestore(app);
-
-export { auth, db };
+export { firebaseConfig };

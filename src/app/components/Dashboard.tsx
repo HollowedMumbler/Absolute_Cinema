@@ -1,9 +1,20 @@
-import { motion } from 'motion/react';
-import { Trophy, Zap, Leaf, TrendingUp, Play, BookOpen, Users, Target } from 'lucide-react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { Progress } from './ui/progress';
-import { Badge } from './ui/badge';
+import {
+  BookOpen,
+  Leaf,
+  Play,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Zap,
+} from "lucide-react";
+import { motion } from "motion/react";
+import { useNavigate } from "react-router";
+
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+import { Progress } from "./ui/progress";
 
 interface DashboardProps {
   user: {
@@ -13,10 +24,11 @@ interface DashboardProps {
     co2Saved: number;
     streakDays: number;
   };
-  onNavigate: (screen: string) => void;
 }
 
-export function Dashboard({ user, onNavigate }: DashboardProps) {
+export function Dashboard({ user }: DashboardProps) {
+  const navigate = useNavigate();
+
   const dailyChallenge = {
     title: "Eco Warrior Challenge",
     description: "Complete 3 trips using sustainable transport",
@@ -40,14 +52,14 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
   };
 
   return (
-    <div className="min-h-screen p-4 space-y-6">
+    <div className="relative min-h-screen space-y-6 p-4">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="pt-4"
       >
-        <h1 className="text-3xl text-white mb-1">
+        <h1 className="mb-1 text-3xl text-white">
           Welcome back, {user.name}! 👋
         </h1>
         <p className="text-slate-400">Ready to race today?</p>
@@ -60,43 +72,47 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
         transition={{ delay: 0.1 }}
         className="grid grid-cols-2 gap-3"
       >
-        <Card className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-green-500/30 p-4">
+        <Card className="border-green-500/30 bg-gradient-to-br from-green-500/20 to-emerald-500/20 p-4">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-slate-300 text-sm mb-1">Total Points</p>
-              <p className="text-2xl text-white">{user.points.toLocaleString()}</p>
+              <p className="mb-1 text-sm text-slate-300">Total Points</p>
+              <p className="text-2xl text-white">
+                {user.points.toLocaleString()}
+              </p>
             </div>
-            <Zap className="text-green-400 w-8 h-8" />
+            <Zap className="h-8 w-8 text-green-400" />
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-blue-500/30 p-4">
+        <Card className="border-blue-500/30 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-4">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-slate-300 text-sm mb-1">Level</p>
+              <p className="mb-1 text-sm text-slate-300">Level</p>
               <p className="text-2xl text-white">{user.level}</p>
             </div>
-            <Trophy className="text-blue-400 w-8 h-8" />
+            <Trophy className="h-8 w-8 text-blue-400" />
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border-emerald-500/30 p-4">
+        <Card className="border-emerald-500/30 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 p-4">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-slate-300 text-sm mb-1">CO₂ Saved</p>
-              <p className="text-2xl text-white">{user.co2Saved.toFixed(1)} kg</p>
+              <p className="mb-1 text-sm text-slate-300">CO₂ Saved</p>
+              <p className="text-2xl text-white">
+                {user.co2Saved.toFixed(1)} kg
+              </p>
             </div>
-            <Leaf className="text-emerald-400 w-8 h-8" />
+            <Leaf className="h-8 w-8 text-emerald-400" />
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500/20 to-amber-500/20 border-orange-500/30 p-4">
+        <Card className="border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-amber-500/20 p-4">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-slate-300 text-sm mb-1">Streak</p>
+              <p className="mb-1 text-sm text-slate-300">Streak</p>
               <p className="text-2xl text-white">{user.streakDays} days</p>
             </div>
-            <TrendingUp className="text-orange-400 w-8 h-8" />
+            <TrendingUp className="h-8 w-8 text-orange-400" />
           </div>
         </Card>
       </motion.div>
@@ -107,26 +123,30 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <Card className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/30 p-5">
-          <div className="flex items-start gap-3 mb-4">
-            <div className="bg-purple-500/20 p-2 rounded-lg">
-              <Target className="text-purple-400 w-6 h-6" />
+        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-5">
+          <div className="mb-4 flex items-start gap-3">
+            <div className="rounded-lg bg-purple-500/20 p-2">
+              <Target className="h-6 w-6 text-purple-400" />
             </div>
             <div className="flex-1">
-              <h3 className="text-white mb-1">{dailyChallenge.title}</h3>
-              <p className="text-sm text-slate-300">{dailyChallenge.description}</p>
+              <h3 className="mb-1 text-white">{dailyChallenge.title}</h3>
+              <p className="text-sm text-slate-300">
+                {dailyChallenge.description}
+              </p>
             </div>
-            <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+            <Badge className="border-purple-500/30 bg-purple-500/20 text-purple-300">
               {dailyChallenge.reward}
             </Badge>
           </div>
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-slate-400">Progress</span>
-              <span className="text-white">{dailyChallenge.progress}/{dailyChallenge.total}</span>
+              <span className="text-white">
+                {dailyChallenge.progress}/{dailyChallenge.total}
+              </span>
             </div>
-            <Progress 
-              value={(dailyChallenge.progress / dailyChallenge.total) * 100} 
+            <Progress
+              value={(dailyChallenge.progress / dailyChallenge.total) * 100}
               className="bg-slate-700"
             />
           </div>
@@ -141,14 +161,14 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
         className="space-y-3"
       >
         <h2 className="text-xl text-white">Quick Actions</h2>
-        
+
         <Button
-          onClick={() => onNavigate('race')}
-          className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-8 text-lg justify-between"
+          onClick={() => navigate("/race")}
+          className="w-full justify-between bg-gradient-to-r from-green-500 to-emerald-600 py-8 text-lg text-white hover:from-green-600 hover:to-emerald-700"
           size="lg"
         >
           <div className="flex items-center gap-3">
-            <Play className="w-6 h-6" />
+            <Play className="h-6 w-6" />
             <span>Start a Lap</span>
           </div>
           <span className="text-sm opacity-80">Track your commute</span>
@@ -156,20 +176,20 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
 
         <div className="grid grid-cols-2 gap-3">
           <Button
-            onClick={() => onNavigate('academy')}
+            onClick={() => navigate("/academy")}
             variant="outline"
-            className="border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-white py-6 flex-col h-auto gap-2"
+            className="h-auto flex-col gap-2 border-blue-500/30 bg-blue-500/10 py-6 text-white hover:bg-blue-500/20"
           >
-            <BookOpen className="w-6 h-6 text-blue-400" />
+            <BookOpen className="h-6 w-6 text-blue-400" />
             <span>Pit Stop Academy</span>
           </Button>
 
           <Button
-            onClick={() => onNavigate('leaderboard')}
+            onClick={() => navigate("/leaderboard")}
             variant="outline"
-            className="border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 text-white py-6 flex-col h-auto gap-2"
+            className="h-auto flex-col gap-2 border-orange-500/30 bg-orange-500/10 py-6 text-white hover:bg-orange-500/20"
           >
-            <Users className="w-6 h-6 text-orange-400" />
+            <Users className="h-6 w-6 text-orange-400" />
             <span>Leaderboard</span>
           </Button>
         </div>
@@ -183,22 +203,24 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
         className="space-y-3"
       >
         <h2 className="text-xl text-white">Today's Stats</h2>
-        <Card className="bg-slate-800/50 border-slate-700 p-5">
+        <Card className="border-slate-700 bg-slate-800/50 p-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-slate-400 text-sm mb-1">Trips</p>
+              <p className="mb-1 text-sm text-slate-400">Trips</p>
               <p className="text-2xl text-white">{todayStats.trips}</p>
             </div>
             <div>
-              <p className="text-slate-400 text-sm mb-1">Distance</p>
+              <p className="mb-1 text-sm text-slate-400">Distance</p>
               <p className="text-2xl text-white">{todayStats.distance} km</p>
             </div>
             <div>
-              <p className="text-slate-400 text-sm mb-1">CO₂ Saved</p>
-              <p className="text-2xl text-green-400">{todayStats.co2Saved} kg</p>
+              <p className="mb-1 text-sm text-slate-400">CO₂ Saved</p>
+              <p className="text-2xl text-green-400">
+                {todayStats.co2Saved} kg
+              </p>
             </div>
             <div>
-              <p className="text-slate-400 text-sm mb-1">Points Earned</p>
+              <p className="mb-1 text-sm text-slate-400">Points Earned</p>
               <p className="text-2xl text-yellow-400">{todayStats.points}</p>
             </div>
           </div>
@@ -221,12 +243,14 @@ export function Dashboard({ user, onNavigate }: DashboardProps) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 + index * 0.1 }}
             >
-              <Card className={`p-4 text-center ${
-                achievement.earned
-                  ? 'bg-gradient-to-br from-yellow-500/20 to-amber-500/20 border-yellow-500/30'
-                  : 'bg-slate-800/50 border-slate-700 opacity-50'
-              }`}>
-                <div className="text-3xl mb-2">{achievement.emoji}</div>
+              <Card
+                className={`p-4 text-center ${
+                  achievement.earned
+                    ? "border-yellow-500/30 bg-gradient-to-br from-yellow-500/20 to-amber-500/20"
+                    : "border-slate-700 bg-slate-800/50 opacity-50"
+                }`}
+              >
+                <div className="mb-2 text-3xl">{achievement.emoji}</div>
                 <p className="text-xs text-slate-300">{achievement.name}</p>
               </Card>
             </motion.div>

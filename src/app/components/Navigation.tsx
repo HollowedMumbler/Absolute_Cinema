@@ -1,60 +1,56 @@
-import { motion } from 'motion/react';
-import { Home, Play, Trophy, BookOpen, User } from 'lucide-react';
+import { BookOpen, Home, Play, Trophy, User } from "lucide-react";
+import { motion } from "motion/react";
+import { NavLink, useLocation } from "react-router";
 
-interface NavigationProps {
-  currentScreen: string;
-  onNavigate: (screen: string) => void;
-}
-
-export function Navigation({ currentScreen, onNavigate }: NavigationProps) {
+export function Navigation() {
   const navItems = [
-    { id: 'dashboard', label: 'Home', icon: Home },
-    { id: 'race', label: 'Race', icon: Play },
-    { id: 'leaderboard', label: 'Ranks', icon: Trophy },
-    { id: 'academy', label: 'Learn', icon: BookOpen },
-    { id: 'profile', label: 'Profile', icon: User },
+    { id: "/", label: "Home", icon: Home },
+    { id: "/race", label: "Race", icon: Play },
+    { id: "/leaderboard", label: "Ranks", icon: Trophy },
+    { id: "/academy", label: "Learn", icon: BookOpen },
+    { id: "/profile", label: "Profile", icon: User },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-lg border-t border-slate-700 z-50">
-      <div className="flex items-center justify-around max-w-2xl mx-auto px-2 py-3">
+    <div className="sticky right-0 bottom-0 left-0 z-50 border-t border-slate-700 bg-slate-900/95 backdrop-blur-lg">
+      <div className="mx-auto flex max-w-2xl items-center justify-around px-2 py-3">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = currentScreen === item.id;
-          
+          const location = useLocation();
+          const isActive = location.pathname === item.id;
+
           return (
-            <button
-              key={item.id}
-              onClick={() => onNavigate(item.id)}
+            <NavLink
+              to={item.id}
               className="relative flex flex-col items-center gap-1 px-4 py-2 transition-all"
             >
               {isActive && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-green-500/20 rounded-xl"
+                  className="absolute inset-0 rounded-xl bg-green-500/20"
                   transition={{ type: "spring", duration: 0.6 }}
                 />
               )}
-              <Icon 
-                className={`w-6 h-6 relative z-10 transition-colors ${
-                  isActive ? 'text-green-400' : 'text-slate-400'
-                }`} 
+              <Icon
+                className={`relative z-10 h-6 w-6 transition-colors ${
+                  isActive ? "text-green-400" : "text-slate-400"
+                }`}
               />
-              <span 
-                className={`text-xs relative z-10 transition-colors ${
-                  isActive ? 'text-green-400' : 'text-slate-400'
+              <span
+                className={`relative z-10 text-xs transition-colors ${
+                  isActive ? "text-green-400" : "text-slate-400"
                 }`}
               >
                 {item.label}
               </span>
-              {isActive && item.id === 'race' && (
+              {isActive && item.id === "race" && (
                 <motion.div
-                  className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full z-10"
+                  className="absolute -top-1 -right-1 z-10 h-2 w-2 rounded-full bg-green-400"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
               )}
-            </button>
+            </NavLink>
           );
         })}
       </div>
